@@ -1,0 +1,21 @@
+package by.alexander.backend.dto;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class ForkliftDto {
+
+    Long id;
+    String brand;
+    String number;
+    Boolean isActive;
+    String updateDate;
+    String fio;
+}
