@@ -27,15 +27,15 @@ public class ForkliftController {
     public ResponseEntity<List<ForkliftDto>> findById() {
         return ResponseEntity.ok(forkliftService.getAll());
     }
+
     @PostMapping
-    public void add(ForkliftDto forkliftDto) {
+    public void add(@RequestBody ForkliftDto forkliftDto) {
         forkliftService.add(forkliftDto);
     }
 
     @PatchMapping("/{id}")
-    @PostMapping
     public void edit(@PathVariable Long id,
-                     ForkliftDto forkliftDto) {
+                     @RequestBody ForkliftDto forkliftDto) {
         forkliftService.edit(id, forkliftDto);
     }
 

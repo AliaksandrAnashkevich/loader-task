@@ -10,7 +10,7 @@ import lombok.experimental.FieldDefaults;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "loader_timeout")
+@Table(name = "loader_timeouts")
 @Data
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -32,6 +32,6 @@ public class ForkliftTimeout {
     String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "forklift_id", referencedColumnName = "forklift_id")
+    @JoinColumn(name = "forklift_id", referencedColumnName = "id")
     Forklift forklift;
 }
