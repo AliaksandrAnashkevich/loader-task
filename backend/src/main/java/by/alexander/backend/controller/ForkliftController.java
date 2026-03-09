@@ -24,8 +24,10 @@ public class ForkliftController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<ForkliftDto>> findById() {
-        return ResponseEntity.ok(forkliftService.getAll());
+    public ResponseEntity<List<ForkliftDto>> findById(@RequestParam(required = false) String number,
+                                                      @RequestParam(defaultValue = "id") String sortBy,
+                                                      @RequestParam(defaultValue = "asc") String direction) {
+        return ResponseEntity.ok(forkliftService.getAll(number, sortBy, direction));
     }
 
     @PostMapping

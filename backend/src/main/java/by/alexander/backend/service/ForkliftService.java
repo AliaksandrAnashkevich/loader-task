@@ -8,7 +8,7 @@ public interface ForkliftService {
 
     ForkliftDto getById(Long id);
 
-    List<ForkliftDto> getAll();
+    List<ForkliftDto> getAll(String number, String sortBy, String direction);
 
     void add(ForkliftDto forkliftDto);
 

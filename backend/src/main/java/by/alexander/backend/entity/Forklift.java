@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,6 +28,9 @@ public class Forklift {
 
     @Column(name = "number")
     String number;
+
+    @Column(name = "load_capacity")
+    BigDecimal loadCapacity;
 
     @Column(name = "is_active")
     Boolean isActive;

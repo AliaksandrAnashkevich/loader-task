@@ -7,6 +7,7 @@ public class ConstantsUtil {
 
     public static final String SPACE = " ";
     public static final String SEMICOLON = "; ";
+    public static final String PERCENT = "%";
     public static final String FORKLIFT = "forklift";
     public static final String TIMEOUT = "timeout";
     public static final String USERS = "user";

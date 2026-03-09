@@ -11,24 +11,30 @@ import org.mapstruct.Named;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import static by.alexander.backend.util.DateUtil.LOCAL_DATE_TIME_FORMAT;
 import static by.alexander.backend.util.DateUtil.TIMEOUT_MESSAGE;
 
 @Mapper(componentModel = "spring")
 public interface ForkliftTimeoutMapper {
 
-    @Mapping(target = "timeout", qualifiedByName = "mapTimeout")
+    @Mapping(target = "timeout", source = "forkliftTimeout", qualifiedByName = "mapTimeout")
+    @Mapping(target = "forkliftId", source = "forkliftTimeout.forklift.id")
     ForkliftTimeoutDto toDto(ForkliftTimeout forkliftTimeout);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "detectedDate", source = "dto.detectedDate", dateFormat = LOCAL_DATE_TIME_FORMAT)
+    @Mapping(target = "solutionDate", source = "dto.solutionDate", dateFormat = LOCAL_DATE_TIME_FORMAT)
     ForkliftTimeout toEntity(ForkliftTimeoutDto dto, Forklift forklift);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "detectedDate", source = "dto.detectedDate", dateFormat = LOCAL_DATE_TIME_FORMAT)
+    @Mapping(target = "solutionDate", source = "dto.solutionDate", dateFormat = LOCAL_DATE_TIME_FORMAT)
     ForkliftTimeout toEntityUpdate(@MappingTarget ForkliftTimeout target, ForkliftTimeoutDto dto, Forklift forklift);
 
-    @Named("mapStatementTypeId")
-    default String mapTimeout(ForkliftTimeout timeout) {
-        LocalDateTime start = timeout.getDetectedDate();
-        LocalDateTime end = timeout.getDetectedDate() != null ? timeout.getDetectedDate() : LocalDateTime.now();
+    @Named("mapTimeout")
+    default String mapTimeout(ForkliftTimeout forkliftTimeout) {
+        LocalDateTime start = forkliftTimeout.getDetectedDate();
+        LocalDateTime end = forkliftTimeout.getSolutionDate() != null ? forkliftTimeout.getSolutionDate() : LocalDateTime.now();
 
         Duration duration = Duration.between(start, end);
 

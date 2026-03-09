@@ -5,6 +5,7 @@ import by.alexander.backend.auth.JwtUserDetailsService;
 import by.alexander.backend.dao.ForkliftRepository;
 import by.alexander.backend.dao.ForkliftTimeoutRepository;
 import by.alexander.backend.dao.UserRepository;
+import by.alexander.backend.dao.specification.ForkliftSpecification;
 import by.alexander.backend.dto.ForkliftDto;
 import by.alexander.backend.entity.Forklift;
 import by.alexander.backend.entity.User;
@@ -15,6 +16,7 @@ import by.alexander.backend.service.ForkliftService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,8 +39,12 @@ public class ForkliftServiceImpl implements ForkliftService {
         return forkliftMapper.toDto(forklift);
     }
 
-    public List<ForkliftDto> getAll() {
-        return forkliftRepository.findAll().stream()
+    public List<ForkliftDto> getAll(String number, String sortBy, String direction) {
+        Sort sort = direction.equalsIgnoreCase("desc")
+                ? Sort.by(sortBy).descending()
+                : Sort.by(sortBy).ascending();
+
+        return forkliftRepository.findAll(ForkliftSpecification.withFilter(number), sort).stream()
                 .map(forkliftMapper::toDto)
                 .toList();
     }

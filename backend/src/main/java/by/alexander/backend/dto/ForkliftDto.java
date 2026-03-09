@@ -15,6 +15,7 @@ public class ForkliftDto {
     Long id;
     String brand;
     String number;
+    String loadCapacity;
     Boolean isActive;
     String updateDate;
     String fio;
