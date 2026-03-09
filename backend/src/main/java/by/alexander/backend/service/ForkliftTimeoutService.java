@@ -8,7 +8,7 @@ public interface ForkliftTimeoutService {
 
     ForkliftTimeoutDto getById(Long id);
 
-    List<ForkliftTimeoutDto> getAllByForkliftId(Long forkliftId);
+    List<ForkliftTimeoutDto> getAllByForkliftId(Long forkliftId, String sortBy, String direction);
 
     void add(ForkliftTimeoutDto forkliftTimeoutDto);
 

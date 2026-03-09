@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ForkliftTimeoutRepository extends JpaRepository<ForkliftTimeout, Long> {
+
+    boolean existsByForkliftIdAndSolutionDateIsNotNull(Long forkliftId);
 }

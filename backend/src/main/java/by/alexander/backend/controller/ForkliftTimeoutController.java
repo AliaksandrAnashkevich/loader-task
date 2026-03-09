@@ -24,8 +24,10 @@ public class ForkliftTimeoutController {
     }
 
     @GetMapping("/forklift/{forkliftId}")
-    public ResponseEntity<List<ForkliftTimeoutDto>> getByForklift(@PathVariable Long forkliftId) {
-        return ResponseEntity.ok(forkliftTimeoutService.getAllByForkliftId(forkliftId));
+    public ResponseEntity<List<ForkliftTimeoutDto>> getByForklift(@PathVariable Long forkliftId,
+                                                                  @RequestParam(defaultValue = "id") String sortBy,
+                                                                  @RequestParam(defaultValue = "asc") String direction) {
+        return ResponseEntity.ok(forkliftTimeoutService.getAllByForkliftId(forkliftId, sortBy, direction));
     }
 
     @PostMapping
