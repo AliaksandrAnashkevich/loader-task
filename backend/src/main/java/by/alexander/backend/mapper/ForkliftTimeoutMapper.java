@@ -19,6 +19,8 @@ public interface ForkliftTimeoutMapper {
 
     @Mapping(target = "timeout", source = "forkliftTimeout", qualifiedByName = "mapTimeout")
     @Mapping(target = "forkliftId", source = "forkliftTimeout.forklift.id")
+    @Mapping(target = "detectedDate", source = "detectedDate", dateFormat = LOCAL_DATE_TIME_FORMAT)
+    @Mapping(target = "solutionDate", source = "solutionDate", dateFormat = LOCAL_DATE_TIME_FORMAT)
     ForkliftTimeoutDto toDto(ForkliftTimeout forkliftTimeout);
 
     @Mapping(target = "id", ignore = true)
@@ -35,6 +37,10 @@ public interface ForkliftTimeoutMapper {
     default String mapTimeout(ForkliftTimeout forkliftTimeout) {
         LocalDateTime start = forkliftTimeout.getDetectedDate();
         LocalDateTime end = forkliftTimeout.getSolutionDate() != null ? forkliftTimeout.getSolutionDate() : LocalDateTime.now();
+
+        if (start == null){
+            return "";
+        }
 
         Duration duration = Duration.between(start, end);
 

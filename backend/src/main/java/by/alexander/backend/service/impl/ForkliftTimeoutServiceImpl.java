@@ -40,7 +40,7 @@ public class ForkliftTimeoutServiceImpl implements ForkliftTimeoutService {
                 ? Sort.by(sortBy).descending()
                 : Sort.by(sortBy).ascending();
 
-        return forkliftTimeoutRepository.findAll(sort).stream()
+        return forkliftTimeoutRepository.findAllByForkliftId(forkliftId, sort).stream()
                 .map(forkliftTimeoutMapper::toDto)
                 .toList();
     }

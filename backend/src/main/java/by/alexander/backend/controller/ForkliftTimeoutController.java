@@ -35,7 +35,7 @@ public class ForkliftTimeoutController {
         forkliftTimeoutService.add(dto);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public void edit(@PathVariable Long id, @RequestBody ForkliftTimeoutDto dto) {
         forkliftTimeoutService.edit(id, dto);
     }
