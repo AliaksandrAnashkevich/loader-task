@@ -20,6 +20,7 @@ import {
   SearchFormData,
 } from "../../interface/forklift";
 import { ColDef, SelectionChangedEvent } from "ag-grid-community";
+import { forkliftCreateFields, forkliftUpdateFields } from "./forkliftData";
 
 const Main = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -227,26 +228,9 @@ const Main = () => {
 
       <FormModal
         open={isModalOpen}
-        fields={[
-          {
-            name: "brand",
-            label: "Марка",
-            type: "text",
-            placeholder: "Введите марку",
-          },
-          {
-            name: "number",
-            label: "Номер",
-            type: "text",
-            placeholder: "Введите номер",
-          },
-          {
-            name: "loadCapacity",
-            label: "Грузоподъемность",
-            type: "float",
-            placeholder: "Введите грузоподъемность",
-          },
-        ]}
+        fields={
+          modalType === "add" ? forkliftCreateFields : forkliftUpdateFields
+        }
         onClose={() => setIsModalOpen(false)}
         onSubmit={onSubmitFormModal}
         title={modalTitle}

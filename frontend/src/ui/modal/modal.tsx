@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../input/input";
 import Button from "../button/button";
+import input from "../input/input";
 
 type Field = {
   name: string;
@@ -63,13 +64,28 @@ const FormModal = ({
           }}
           className="space-y-4"
         >
-          {fields.map((field) => (
-            <Input
-              label={field.label}
-              type={field.type || "text"}
-              registration={register(field.name)}
-            />
-          ))}
+          {fields.map((field) => {
+            if (field.type !== "checkbox") {
+              return (
+                <Input
+                  label={field.label}
+                  type={field.type || "text"}
+                  registration={register(field.name)}
+                />
+              );
+            } else {
+              return (
+                <div className="flex items-center gap-2">
+                  <input
+                    id={field.name}
+                    {...register(field.name)}
+                    type="checkbox"
+                  />
+                  <label htmlFor={field.name}>Активный</label>
+                </div>
+              );
+            }
+          })}
 
           <div className="flex justify-end gap-3 pt-3">
             <button

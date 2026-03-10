@@ -12,6 +12,7 @@ import Button from "../../ui/button/button";
 import { Loading } from "../../enum/loading";
 import { ColDef } from "ag-grid-community";
 import { ForkliftTimeoutInterface } from "../../interface/forkliftTimeoutInterface";
+import { forkliftTimeoutFields } from "./forkliftTimeoutData";
 
 const ForkliftTimeout = ({ selectedRowForkLift }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -128,6 +129,7 @@ const ForkliftTimeout = ({ selectedRowForkLift }: any) => {
       direction: sort,
     });
   };
+
   useEffect(() => {
     if (!selectedRowForkLift) return;
 
@@ -182,26 +184,7 @@ const ForkliftTimeout = ({ selectedRowForkLift }: any) => {
 
       <FormModal
         open={isModalOpen}
-        fields={[
-          {
-            name: "detectedDate",
-            label: "Начало",
-            type: "datetime-local",
-            placeholder: "",
-          },
-          {
-            name: "solutionDate",
-            label: "Окончание",
-            type: "datetime-local",
-            placeholder: "",
-          },
-          {
-            name: "description",
-            label: "Причина",
-            type: "text",
-            placeholder: "Введите причину",
-          },
-        ]}
+        fields={forkliftTimeoutFields}
         onClose={() => setIsModalOpen(false)}
         onSubmit={onSubmitFormModal}
         title={modalTitle}
