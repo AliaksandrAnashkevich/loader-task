@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+       http://www.liquibase.org/xml/ns/dbchangelog
+       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="1-create-users" author="dev">
+        <createTable tableName="users">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="fio" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="login" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint
+                tableName="users"
+                columnNames="login"
+                constraintName="uk_users_login"/>
+    </changeSet>
+
+
+    <changeSet id="2-create-forklifts" author="dev">
+        <createTable tableName="forklifts">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="brand" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="loadCapacity" type="DECIMAL(10,3)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="isActive" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updateDate" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="forklifts"
+                baseColumnNames="user_id"
+                constraintName="fk_forklifts_users"
+                referencedTableName="users"
+                referencedColumnNames="id"/>
+    </changeSet>
+
+
+    <changeSet id="3-create-forklift-timeouts" author="dev">
+        <createTable tableName="forklift_timeouts">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="detectedDate" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="solutionDate" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="forklift_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="forklift_timeouts"
+                baseColumnNames="forklift_id"
+                constraintName="fk_timeouts_forklift"
+                referencedTableName="forklifts"
+                referencedColumnNames="id"/>
+    </changeSet>
+
+
+    <changeSet id="4-insert-admin" author="dev">
+        <insert tableName="users">
+            <column name="fio" value="Админ АА"/>
+            <column name="login" value="admin"/>
+            <column name="password"
+                    value="$2a$10$QTZYxn23fUuZQgJzfEF3r.0LjsMYx4hFVQNLuXbmeRpvSTiPacQr2"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
