@@ -7,7 +7,7 @@
        http://www.liquibase.org/xml/ns/dbchangelog
        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
-    <changeSet id="1-create-users" author="dev">
+    <changeSet id="1-create-users" author="alexandr">
         <createTable tableName="users">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -33,7 +33,7 @@
     </changeSet>
 
 
-    <changeSet id="2-create-forklifts" author="dev">
+    <changeSet id="2-create-forklifts" author="alexandr">
         <createTable tableName="forklifts">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -47,15 +47,15 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="loadCapacity" type="DECIMAL(10,3)">
+            <column name="load_capacity" type="DECIMAL(10,3)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="isActive" type="BOOLEAN">
+            <column name="is_active" type="BOOLEAN">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="updateDate" type="DATETIME">
+            <column name="update_date" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
 
@@ -73,17 +73,17 @@
     </changeSet>
 
 
-    <changeSet id="3-create-forklift-timeouts" author="dev">
+    <changeSet id="3-create-forklift-timeouts" author="alexandr">
         <createTable tableName="forklift_timeouts">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="detectedDate" type="DATETIME">
+            <column name="detected_date" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="solutionDate" type="DATETIME">
+            <column name="solution_date" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
 
@@ -105,7 +105,7 @@
     </changeSet>
 
 
-    <changeSet id="4-insert-admin" author="dev">
+    <changeSet id="4-insert-admin" author="alexandr">
         <insert tableName="users">
             <column name="fio" value="Админ АА"/>
             <column name="login" value="admin"/>
