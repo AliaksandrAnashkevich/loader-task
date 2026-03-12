@@ -11,16 +11,15 @@ import org.mapstruct.Named;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static by.alexander.backend.util.DateUtil.LOCAL_DATE_TIME_FORMAT;
-import static by.alexander.backend.util.DateUtil.TIMEOUT_MESSAGE;
+import static by.alexander.backend.util.DateUtil.*;
 
 @Mapper(componentModel = "spring")
 public interface ForkliftTimeoutMapper {
 
     @Mapping(target = "timeout", source = "forkliftTimeout", qualifiedByName = "mapTimeout")
     @Mapping(target = "forkliftId", source = "forkliftTimeout.forklift.id")
-    @Mapping(target = "detectedDate", source = "detectedDate", dateFormat = LOCAL_DATE_TIME_FORMAT)
-    @Mapping(target = "solutionDate", source = "solutionDate", dateFormat = LOCAL_DATE_TIME_FORMAT)
+    @Mapping(target = "detectedDate", source = "detectedDate", dateFormat = MESSAGE_LOCAL_DATE_TIME_FORMAT)
+    @Mapping(target = "solutionDate", source = "solutionDate", dateFormat = MESSAGE_LOCAL_DATE_TIME_FORMAT)
     ForkliftTimeoutDto toDto(ForkliftTimeout forkliftTimeout);
 
     @Mapping(target = "id", ignore = true)

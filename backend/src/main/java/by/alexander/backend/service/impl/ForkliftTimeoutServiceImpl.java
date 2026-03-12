@@ -49,6 +49,11 @@ public class ForkliftTimeoutServiceImpl implements ForkliftTimeoutService {
     public void add(ForkliftTimeoutDto dto) {
         Forklift forklift = forkliftRepository.findById(dto.getForkliftId())
                 .orElseThrow(() -> new ResourceNotFoundException(FORKLIFT, ID, dto.getForkliftId()));
+        dto.setDetectedDate(dto.getDetectedDate().substring(0, 16));
+        dto.setSolutionDate(dto.getSolutionDate().substring(0, 16));
+        if (dto.getSolutionDate().isEmpty()) {
+            dto.setSolutionDate(null);
+        }
         ForkliftTimeout forkliftTimeout = forkliftTimeoutMapper.toEntity(dto, forklift);
         forkliftTimeoutRepository.save(forkliftTimeout);
     }
@@ -59,6 +64,11 @@ public class ForkliftTimeoutServiceImpl implements ForkliftTimeoutService {
                 .orElseThrow(() -> new ResourceNotFoundException(TIMEOUT, ID, id));
         Forklift forklift = forkliftRepository.findById(dto.getForkliftId())
                 .orElseThrow(() -> new ResourceNotFoundException(FORKLIFT, ID, dto.getForkliftId()));
+        dto.setDetectedDate(dto.getDetectedDate().substring(0, 16));
+        dto.setSolutionDate(dto.getSolutionDate().substring(0, 16));
+        if (dto.getSolutionDate().isEmpty()) {
+            dto.setSolutionDate(null);
+        }
         forkliftTimeout = forkliftTimeoutMapper.toEntityUpdate(forkliftTimeout, dto, forklift);
         forkliftTimeoutRepository.save(forkliftTimeout);
 

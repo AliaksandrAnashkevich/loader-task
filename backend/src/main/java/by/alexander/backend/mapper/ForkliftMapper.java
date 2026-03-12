@@ -11,14 +11,14 @@ import org.mapstruct.Named;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import static by.alexander.backend.util.DateUtil.LOCAL_DATE_TIME_FORMAT;
+import static by.alexander.backend.util.DateUtil.MESSAGE_LOCAL_DATE_TIME_FORMAT;
 
 @Mapper(componentModel = "spring")
 public interface ForkliftMapper {
 
     @Mapping(target = "fio", source = "user.fio")
     @Mapping(target = "loadCapacity", source = "loadCapacity", qualifiedByName = "mapLoadCapacity")
-    @Mapping(target = "updateDate", source = "updateDate", dateFormat = LOCAL_DATE_TIME_FORMAT)
+    @Mapping(target = "updateDate", source = "updateDate", dateFormat = MESSAGE_LOCAL_DATE_TIME_FORMAT)
     ForkliftDto toDto(Forklift forklift);
 
     @Mapping(target = "id", ignore = true)
