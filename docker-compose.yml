@@ -4,7 +4,7 @@ services:
     container_name: db
     restart: always
     environment:
-      POSTGRES_USER: postgres
+      POSTGRES_USER: forklift
       POSTGRES_PASSWORD: password
       POSTGRES_DB: forklift_db
     ports:
@@ -20,7 +20,7 @@ services:
       - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/forklift_db
-      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_USERNAME: forklift
       SPRING_DATASOURCE_PASSWORD: password
     depends_on:
       - db

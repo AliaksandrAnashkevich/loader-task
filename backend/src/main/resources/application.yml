@@ -2,7 +2,7 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://db:5432/forklift_db
-    username: postgres
+    username: forklift
     password: password
   jpa:
     hibernate:
